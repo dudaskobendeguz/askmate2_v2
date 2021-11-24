@@ -59,7 +59,7 @@ def sort_questions(orders):
         is_reverse = False
     elif order_direction == 'desc':
         is_reverse = True
-    ordered_list = sorted(question_list, key=lambda item: item[order_title], reverse=is_reverse)
+    ordered_list = sorted(question_list, key=lambda item: [int(item[order_title]) if item[order_title].isdigit() else item[order_title]], reverse=is_reverse)
     return ordered_list
 
 
