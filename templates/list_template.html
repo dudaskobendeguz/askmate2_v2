@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>{% block title %}Jinja V3 Forum{% endblock %}</title>
 </head>
-<body>
+<body style="text-align: center">
 <h1>{% block h1 %}{% endblock %}</h1><br>
 
 <h4>{%block h4%}{% endblock %}</h4>
 
 {% block ask_question %}{% endblock %}
+
+{% block display_question %}{% endblock %}
 
 {% block table %}
 <table border="1">
@@ -21,18 +23,18 @@
         </tr>
     {% endif %}
     {% if forum_posts != [] %}
-            {% for q_and_a in forum_posts %}
-                <tr>
-                {% for key, value in q_and_a.items() %}
-                    {% if key == 'title' %}
-                        <td><a href="/question/{{ q_and_a['id'] }}">{{ value }}</a></td>
-                        {% block question_title %}<td>{{ value }}</td>{% endblock %}
-                    {% else %}
-                        <td>{{ value }}</td>
-                    {% endif %}
-                {% endfor %}
-                </tr>
+        {% for QNA in forum_posts %}
+            <tr>
+            {% for key, value in QNA.items() %}
+                {% if key == 'title' %}
+                    <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
+                    {% block question_title %}<td>{{ value }}</td>{% endblock %}
+                {% else %}
+                    <td>{{ value }}</td>
+                {% endif %}
             {% endfor %}
+            </tr>
+        {% endfor %}
     {% endif %}
 </table>
 {% endblock %}
