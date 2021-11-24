@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jinja Forum</title>
+</head>
+<body>
+<h1>Hello {{ user.capitalize() }}!!!</h1><br>
+
+<h4>{%block h4%}Here you can see the questions{% endblock %}</h4>
+
+<table border="1">
+    {% if questions != [] %}
+        <tr>
+        {% for key in questions[0].keys() %}
+        <th>
+            {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+        </th>
+        {% endfor %}
+    {% else %}
+        {{ 'There is no question yet' }}
+        </tr>
+    {% endif %}
+    {% if question != [] %}
+            {% for question in questions %}
+                <tr>
+                {% for value in question.values() %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    {% endif %}
+</table>
+</body>
+</html>
