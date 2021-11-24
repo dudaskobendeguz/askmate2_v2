@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jinja Forum</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<h1>Hello {{ user.capitalize() }}!!!</h1><br>
+<h1>{% block h1 %}{% endblock %}</h1><br>
 
-<h4>{%block h4%}Here you can see the questions{% endblock %}</h4>
+<h4>{%block h4%}{% endblock %}</h4>
 
+{% block table %}
 <table border="1">
     {% if questions != [] %}
         <tr>
@@ -31,5 +32,6 @@
             {% endfor %}
     {% endif %}
 </table>
+{% endblock %}
 </body>
 </html>

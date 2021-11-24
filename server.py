@@ -12,7 +12,7 @@ def main_page():
     username = ''
     if '/login' in request.base_url:
         if request.method == 'POST' and request.form['password']:
-            logged_in, valid_password, new_user = data_manager.log_in(request.form)
+            valid_password= data_manager.log_in(request.form)
             if not valid_password:
                 return redirect(f'/?login=False&username={request.form["username"]}')
             return redirect(f'/list?username={request.form["username"]}')

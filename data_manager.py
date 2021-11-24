@@ -53,12 +53,11 @@ def log_in(user):
         users.append(user)
         connection.write_file(users, USER_FILE_PATH, USER_HEADER)
         connection.write_file(users, USER_FILE_PATH, USER_HEADER)
-        return True, True, True
+        return True
 
     users = connection.open_file(USER_FILE_PATH)
     logged_in = False
     valid_password = True
-    new_user = False
     for registered_user in users:
         if registered_user['username'] == user["username"]:
             if registered_user['password'] == user['password']:
@@ -70,6 +69,6 @@ def log_in(user):
                 logged_in = False
                 valid_password = False
     if not logged_in and valid_password and user:
-        logged_in, valid_password, new_user = register_new_user()
-    return logged_in, valid_password, new_user
+        valid_password = register_new_user()
+    return valid_password
 
