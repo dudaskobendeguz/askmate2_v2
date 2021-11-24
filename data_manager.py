@@ -1,10 +1,10 @@
 import connection
 
 QUESTIONS_FILE_PATH = 'data/question.csv'
-QUESTION_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+QUESTION_HEADER = ['id', 'username', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 
 ANSWERS_FILE_PATH = 'data/answer.csv'
-ANSWERS_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
+ANSWERS_HEADER = ['id', 'username', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 USER_FILE_PATH = 'data/user.csv'
 USER_HEADER = ['username', 'password']
@@ -14,8 +14,24 @@ def get_questions():
     return connection.open_file(QUESTIONS_FILE_PATH)
 
 
+def get_question_by_id(question_id):
+    questions = get_questions()
+    for question in questions:
+        if question['id'] == question_id:
+            return question
+
+
 def get_answers():
     return connection.open_file(ANSWERS_FILE_PATH)
+
+
+def answers_by_question_id(question_id):
+    answers = get_answers()
+    answers_list = []
+    for answer in answers:
+        if answer['question_id'] == question_id:
+            answers_list.append(answer)
+    return answers
 
 
 def export_questions(question_list):

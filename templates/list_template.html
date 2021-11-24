@@ -27,8 +27,12 @@
     {% if question != [] %}
             {% for question in questions %}
                 <tr>
-                {% for value in question.values() %}
-                    <td>{{ value }}</td>
+                {% for key, value in question.items() %}
+                    {% if key == 'title' %}
+                        <td><a href="/question/{{ question['id'] }}">{{ value }}</a></td>
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
                 {% endfor %}
                 </tr>
             {% endfor %}

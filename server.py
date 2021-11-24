@@ -12,7 +12,6 @@ USER = ''
 @app.route('/login', methods=['POST', 'GET'])
 def main_page():
     global USER
-    print(request.base_url)
     message = 'Create a New Account, or Log in'
     username = ''
     if '/login' in request.base_url:
@@ -37,6 +36,13 @@ def list_posts():
     if request.args:
         questions = data_manager.sort_questions(request.args)
     return render_template('list.html', user=USER, questions=questions)
+
+
+@app.route('/question/<question_id>')
+def display_question(question_id):
+    question = data_manager.get_question_by_id(question_id)
+    answers = data_manager.answers_by_question_id(question_id)
+    return render_template('display_question.html', question=question, answers=answers)
 
 
 if __name__ == "__main__":
