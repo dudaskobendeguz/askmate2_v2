@@ -35,14 +35,14 @@ def list_posts():
     questions = data_manager.get_questions()
     if request.args:
         questions = data_manager.sort_questions(request.args)
-    return render_template('list.html', user=USER, questions=questions)
+    return render_template('list.html', user=USER, forum_posts=questions)
 
 
 @app.route('/question/<question_id>')
 def display_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.answers_by_question_id(question_id)
-    return render_template('display_question.html', question=question, answers=answers)
+    return render_template('display_question.html', question=question, forum_posts=answers)
 
 
 if __name__ == "__main__":

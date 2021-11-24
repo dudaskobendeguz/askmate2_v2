@@ -11,9 +11,9 @@
 
 {% block table %}
 <table border="1">
-    {% if questions != [] %}
+    {% if forum_posts != [] %}
         <tr>
-        {% for key in questions[0].keys() %}
+        {% for key in forum_posts[0].keys() %}
         <th>
             <a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>
             {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
@@ -24,12 +24,12 @@
         {{ 'There is no question yet' }}
         </tr>
     {% endif %}
-    {% if question != [] %}
-            {% for question in questions %}
+    {% if forum_posts != [] %}
+            {% for QNA in forum_posts %}
                 <tr>
-                {% for key, value in question.items() %}
+                {% for key, value in QNA.items() %}
                     {% if key == 'title' %}
-                        <td><a href="/question/{{ question['id'] }}">{{ value }}</a></td>
+                        <td><a href="/QNA/{{ QNA['id'] }}">{{ value }}</a></td>
                     {% else %}
                         <td>{{ value }}</td>
                     {% endif %}
