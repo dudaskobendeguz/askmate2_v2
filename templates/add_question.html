@@ -1,0 +1,15 @@
+{% extends "list_template.html" %}
+
+{% block h1 %}Ask a question{% endblock %}
+
+{% block table %}
+    <form action="question/{{ new_question_id }}" method="post">
+        <label for="title"><strong>Title of your question:</strong></label><br>
+        <textarea name="title" required rows="5" cols="25"></textarea><br><br>
+
+        <label for="message"><strong>Your message:</strong></label><br>
+        <textarea name="message" required rows="10" cols="50"></textarea><br><br>
+
+        <button type="submit">Send question</button>
+    </form>
+{% endblock %}

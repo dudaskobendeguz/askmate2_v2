@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 
-import data_manager
+import data_manager, util
 
 app = Flask(__name__)
 
@@ -43,6 +43,14 @@ def display_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.answers_by_question_id(question_id)
     return render_template('display_question.html', question=question, forum_posts=answers)
+
+
+@app.route('/add-question')
+def ask_question():
+    global USER
+    util.create_question(request.form, USER)
+    question_id = 1
+    return render_template('add_question.html', new_question_id=question_id)
 
 
 if __name__ == "__main__":
