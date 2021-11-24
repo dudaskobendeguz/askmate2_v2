@@ -13,23 +13,17 @@
 <table border="1">
     {% if forum_posts != [] %}
         <tr>
-        {% for key in forum_posts[0].keys() %}
-        <th>
-             {% block ascend %}<a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>{% endblock %}
-            {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
-            {% block descend %}<a href="/list?order_by={{ key }}&order_direction=desc">&#8650</a>{% endblock %}
-        </th>
-        {% endfor %}
+        {% block categories %}{% endblock %}
     {% else %}
         {{ 'There is no question yet' }}
         </tr>
     {% endif %}
     {% if forum_posts != [] %}
-            {% for QNA in forum_posts %}
+            {% for q_and_a in forum_posts %}
                 <tr>
-                {% for key, value in QNA.items() %}
+                {% for key, value in q_and_a.items() %}
                     {% if key == 'title' %}
-                        {% block question_link %}<td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>{% endblock %}
+                        <td><a href="/question/{{ q_and_a['id'] }}">{{ value }}</a></td>
                         {% block question_title %}<td>{{ value }}</td>{% endblock %}
                     {% else %}
                         <td>{{ value }}</td>

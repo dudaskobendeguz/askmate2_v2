@@ -3,3 +3,10 @@
 {% block h1 %}Question{% endblock %}
 {% block h4 %}Question from: {{ question['username'] }}{% endblock %}
 {% block question_link %}{% endblock %}
+{% block categories %}
+{% for key in forum_posts[0].keys() %}
+<th>
+    {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+</th>
+{% endfor %}
+{% endblock %}
