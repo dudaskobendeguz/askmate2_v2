@@ -31,7 +31,7 @@ def answers_by_question_id(question_id):
     for answer in answers:
         if answer['question_id'] == question_id:
             answers_list.append(answer)
-    return answers
+    return answers_list
 
 
 def export_questions(question_list):

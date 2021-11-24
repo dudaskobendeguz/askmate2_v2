@@ -1,8 +1,23 @@
 {% extends "list_template.html" %}
 
-{% block h1 %}Question{% endblock %}
-{% block h4 %}Question from: {{ question['username'] }}{% endblock %}
-{% block question_link %}{% endblock %}
+{% block h1 %}Question from<br> {{ question['username'] }}{% endblock %}
+{% block display_question %}
+    <h3>Title</h3>
+        <p>{{ question['title'] }}
+        <br>
+    <h3>Message</h3>
+        <p>{{ question['message'] }}
+        <br>
+    {% if 'image' in question['image']  %}
+        <h3>Picture</h3>
+        <p>{{ question['image'] }}</p>
+    {% endif %}
+    <br>
+    <p><strong>Views:</strong> {{ question['view_number'] }}</p>
+    <p><strong>Votes:</strong> {{ question['vote_number'] }}</p>
+    <br><br>
+{% endblock %}
+
 {% block categories %}
 {% for key in forum_posts[0].keys() %}
 <th>
