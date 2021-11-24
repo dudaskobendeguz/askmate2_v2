@@ -10,6 +10,7 @@ def main_page():
     if request.args:
         if request.args['login'] == 'False':
             message = 'Wrong Password'
+        if request.args['username']:
             username = request.args['username']
     return render_template('/main_page.html', message=message, username=username)
 
@@ -17,10 +18,10 @@ def main_page():
 @app.route('/list', methods=['GET', 'POST'])
 def list_posts():
     questions = data_manager.get_questions()
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form['password']:
         logged_in, valid_password, new_user = data_manager.log_in(request.form)
         if not valid_password:
-            return redirect('/?login=False')
+            return redirect(f'/?login=False&username={request.form["username"]}')
         if logged_in:
             user = request.form["username"]
     else:
