@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
+
 import data_manager
+
 app = Flask(__name__)
 
 
@@ -13,19 +15,19 @@ def main_page():
     print(request.base_url)
     message = 'Create a New Account, or Log in'
     username = ''
-    if request.url_rule == '/':
-        if request.args:
-            if request.args['login'] == 'False':
-                message = 'Wrong Password'
-            if request.args['username']:
-                username = request.args['username']
-    elif '/login' in request.base_url:
+    if '/login' in request.base_url:
         if request.method == 'POST' and request.form['password']:
             logged_in, valid_password, new_user = data_manager.log_in(request.form)
             if not valid_password:
                 return redirect(f'/?login=False&username={request.form["username"]}')
             USER = request.form['username']
             return redirect(f'/list')
+    else:
+        if request.args:
+            if request.args['login'] == 'False':
+                message = 'Wrong Password'
+            if request.args['username']:
+                username = request.args['username']
     return render_template('/main_page.html', message=message, username=username)
 
 
