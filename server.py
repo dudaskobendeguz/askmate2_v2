@@ -8,7 +8,6 @@ def main_page():
     message = 'Create a New Account, or Log in'
     username = ''
     if request.args:
-        print(request.args['username'])
         if request.args['login'] == 'False':
             message = 'Wrong Password'
         if request.args['username']:
@@ -18,7 +17,7 @@ def main_page():
 
 @app.route('/list', methods=['GET', 'POST'])
 def list_posts():
-
+    questions = data_manager.get_questions()
     if request.method == 'POST' and request.form['password']:
         logged_in, valid_password, new_user = data_manager.log_in(request.form)
         if not valid_password:
@@ -27,7 +26,7 @@ def list_posts():
             user = request.form["username"]
     else:
         return redirect(f'/?login=False&username={request.form["username"]}')
-    return render_template('list.html', user=user)
+    return render_template('list.html', user=user, questions=questions)
 
 
 if __name__ == "__main__":
