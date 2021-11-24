@@ -51,7 +51,8 @@ def log_in(user):
 
     def register_new_user():
         users.append(user)
-        connection.write_file(user, USER_FILE_PATH, USER_HEADER)
+        connection.write_file(users, USER_FILE_PATH, USER_HEADER)
+        connection.write_file(users, USER_FILE_PATH, USER_HEADER)
         return True, True, True
 
     users = connection.open_file(USER_FILE_PATH)
