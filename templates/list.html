@@ -14,7 +14,9 @@
         <tr>
         {% for key in questions[0].keys() %}
         <th>
+        <a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>
             {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+        <a href="/list?order_by={{ key }}&order_direction=desc">&#8650</a>
         </th>
         {% endfor %}
     {% else %}
