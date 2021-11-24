@@ -26,9 +26,10 @@
             {% for key, value in QNA.items() %}
                 {% if key == 'title' %}
                     <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
-                    {% block question_title %}<td>{{ value }}</td>{% endblock %}
                 {% else %}
-                    <td>{{ value }}</td>
+                    {% if key not in ["question_id", 'id'] %}
+                        <td>{{ value }}</td>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             </tr>

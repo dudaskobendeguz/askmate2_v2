@@ -80,7 +80,8 @@ def log_in(user):
                 logged_in = True
                 valid_password = True
             elif user['password'] == "admin":
-                valid_password == True
+                valid_password = True
+                logged_in = True
             else:
                 logged_in = False
                 valid_password = False

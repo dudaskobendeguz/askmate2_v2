@@ -20,8 +20,10 @@
 
 {% block categories %}
 {% for key in forum_posts[0].keys() %}
-<th>
-    {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
-</th>
+    {% if key not in  ["question_id", "id"] %}
+        <th>
+        {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+        </th>
+    {% endif %}
 {% endfor %}
 {% endblock %}
