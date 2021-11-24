@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Jinja V3 Forum{% endblock %}</title>
 </head>
 <body>
 <h1>{% block h1 %}{% endblock %}</h1><br>
@@ -15,9 +15,9 @@
         <tr>
         {% for key in forum_posts[0].keys() %}
         <th>
-            <a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>
+             {% block ascend %}<a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>{% endblock %}
             {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
-            <a href="/list?order_by={{ key }}&order_direction=desc">&#8650</a>
+            {% block descend %}<a href="/list?order_by={{ key }}&order_direction=desc">&#8650</a>{% endblock %}
         </th>
         {% endfor %}
     {% else %}
@@ -29,7 +29,8 @@
                 <tr>
                 {% for key, value in QNA.items() %}
                     {% if key == 'title' %}
-                        <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
+                        {% block question_link %}<td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>{% endblock %}
+                        {% block question_title %}<td>{{ value }}</td>{% endblock %}
                     {% else %}
                         <td>{{ value }}</td>
                     {% endif %}
