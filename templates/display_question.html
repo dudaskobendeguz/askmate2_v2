@@ -15,7 +15,6 @@
     <br>
     <p><strong>Views:</strong> {{ question['view_number'] }}</p>
     <p><strong>Votes:</strong> {{ question['vote_number'] }}</p>
-    <br><br>
 {% endblock %}
 
 {% block categories %}
@@ -26,4 +25,17 @@
         </th>
     {% endif %}
 {% endfor %}
+{% endblock %}
+
+{% block edit %}
+    <form action='/question/{{ question["id"] }}/edit'>
+        <button><strong>Edit</strong></button>
+    </form>
+    <br>
+{% endblock %}
+
+{% block delete %}
+    <form action='/question/{{ question["id"] }}/delete'>
+        <button style="color: #ff0000"><strong>Delete</strong></button>
+    </form>
 {% endblock %}

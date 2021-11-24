@@ -9,7 +9,12 @@
 
 <h4>{%block h4%}{% endblock %}</h4>
 
+{% block ask_question %}{% endblock %}
+
 {% block display_question %}{% endblock %}
+
+{% block edit %}{% endblock %}
+{% block delete %}{% endblock %}
 
 {% block table %}
 <table border="1">
@@ -32,6 +37,40 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
+            {% if user == QNA['username'] %}
+                {% if QNA['question_id'] %}
+
+                    <form action='/answer/{{ QNA["id"] }}/edit'>
+                        <td><button><strong>Edit</strong></button></td>
+                    </form>
+
+                    <form action='/answer/{{ QNA["id"] }}/vote_up'>
+                        <td><button style="color: darkblue"><strong>👍</strong></button></td>
+                    </form>
+
+                    <form action='/answer/{{ QNA["id"] }}/vote_down'>
+                        <td><button style="color: darkred"><strong>👎</strong></button></td>
+                    </form>
+
+                    <form action='/answer/{{ QNA["id"] }}/delete'>
+                        <td><button style="color: red"><strong>Delete</strong></button></td>
+                    </form>
+
+                {% else %}
+                    <form action='/question/{{ QNA["id"] }}/edit'>
+                        <td><button><strong>Edit</strong></button></td>
+                    </form>
+
+                    <form action='/question/{{ QNA["id"] }}/vote_up'>
+                        <td><button style="color: darkblue"><strong>👍</strong></button></td>
+                    </form>
+
+                    <form action='/question/{{ QNA["id"] }}/vote_down'>
+                        <td><button style="color: darkred"><strong>👎</strong></button></td>
+                    </form>
+
+                {% endif %}
+            {% endif %}
             </tr>
         {% endfor %}
     {% endif %}
