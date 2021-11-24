@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jinja 3</title>
+</head>
+<body style="text-align: center">
+<h1>Jinja 3</h1>
+    <h2>Welcome on the World's Best forum site!!! </h2>
+    <h3 style="color: darkorange">{{ message }}</h3>
+    <form action="/list" method="post">
+        <label>Username</label><br>
+        <input name="username" value={{ username }} required><br>
+        <label>Password</label><br>
+        <input name="password" type="password" required><br>
+        <button type="submit">Log in</button>
+    </form>
+</body>
+</html>

@@ -6,6 +6,9 @@ QUESTION_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title
 ANSWERS_FILE_PATH = 'data/answer.csv'
 ANSWERS_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
+USER_FILE_PATH = 'data/user.csv'
+USER_HEADER = ['username', 'password']
+
 
 def get_questions():
     return connection.open_file(QUESTIONS_FILE_PATH)
@@ -42,4 +45,28 @@ def sort_questions(orders):
         is_reverse = True
     ordered_list = sorted(question_list, key=lambda item: item[order_title], reverse=is_reverse)
     return ordered_list
+
+
+def log_in(user):
+
+    def register_new_user():
+        users.append(user)
+        connection.write_file(user, USER_FILE_PATH, USER_HEADER)
+        return True, True, True
+
+    users = connection.open_file(USER_FILE_PATH)
+    logged_in = False
+    valid_password = True
+    new_user = False
+    for registered_user in users:
+        if registered_user['username'] == user["username"]:
+            if registered_user['password'] == user['password']:
+                logged_in = True
+                valid_password = True
+            else:
+                logged_in = False
+                valid_password = False
+    if not logged_in and valid_password and user:
+        logged_in, valid_password, new_user = register_new_user()
+    return logged_in, valid_password, new_user
 
