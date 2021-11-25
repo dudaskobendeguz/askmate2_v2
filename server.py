@@ -81,6 +81,7 @@ def vote(question_id=None, answer_id=None):
             util.vote(answer_id, is_question=False, vote=-1)
     return redirect("/list")
 
+
 if __name__ == "__main__":
     app.run(
         host='0.0.0.0',
