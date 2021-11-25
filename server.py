@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-
 import data_manager, util
 
 app = Flask(__name__)
-
-
 USER = ''
 
 
