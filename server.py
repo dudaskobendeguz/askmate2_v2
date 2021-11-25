@@ -9,6 +9,7 @@ USER = None
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
 @app.route('/log_out')
