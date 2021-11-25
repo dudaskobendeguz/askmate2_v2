@@ -76,7 +76,7 @@ def ask_question(question_id=None):
         if question_id:
             util.create_answer(request.form, question_id, USER, filename)
         else:
-            util.create_question(request.form, USER, filename)
+            question_id = util.create_question(request.form, USER, filename)
         return redirect(f'/question/{question_id}')
     if question_id:
         return render_template('add_answer.html', question_id=question_id)

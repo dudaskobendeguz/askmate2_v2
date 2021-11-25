@@ -54,3 +54,10 @@ def register_new_user(user, users):
     connection.write_file(users, USER_FILE_PATH, USER_HEADER)
     valid_password = True
     return valid_password
+
+
+
+    if request.method == 'POST':
+        question_id = util.create_question(request.form, USER)
+        return redirect(f'/question/{question_id}')
+    return render_template('add_question.html')
