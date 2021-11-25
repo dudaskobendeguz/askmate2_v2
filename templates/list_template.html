@@ -55,7 +55,7 @@
                 <tr>
                 {% for key, value in QNA.items() %}
                     {% if key == 'title' %}
-                        <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
+                        <td><a href="/question/{{ QNA['id'] }}?view=true">{{ value }}</a></td>
                     {% else %}
                         {% if key not in ["question_id", 'id'] %}
                             <td>{{ value }}</td>

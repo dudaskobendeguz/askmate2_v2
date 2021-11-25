@@ -94,18 +94,28 @@ def delete_answers_for_question(question_id):
     data_manager.export_answers(answers)
 
 
+def increase_view(question_id):
+    questions = data_manager.get_questions()
+    question = get_user_post_by_id(question_id, is_question=True)
+    questions = manipulate_post_number(post=question, posts=questions, number=1, key='view_number')
+    data_manager.export_questions(questions)
+
+
 def vote(post_id,  is_question, vote):
     if is_question:
-        questions = data_manager.get_questions()
         question = get_user_post_by_id(post_id, is_question=True)
-        index = questions.index(question)
-        question['vote_number'] = str(int(question['vote_number']) + int(vote))
-        questions[index] = question
+        questions = data_manager.get_questions()
+        questions = manipulate_post_number(post=question, posts=questions, number=vote, key='vote_number')
         data_manager.export_questions(questions)
     else:
-        answers = data_manager.get_answers()
         answer = get_user_post_by_id(post_id, is_question=False)
-        index = answers.index(answer)
-        answer['vote_number'] = str(int(answer['vote_number']) + int(vote))
-        answers[index] = answer
+        answers = data_manager.get_answers()
+        answers = manipulate_post_number(post=answer, posts=answers, number=vote, key='vote_number')
         data_manager.export_answers(answers)
+
+
+def manipulate_post_number(post, posts, number, key):
+    index = posts.index(post)
+    post[key] = str(int(post[key]) + int(number))
+    posts[index] = post
+    return posts

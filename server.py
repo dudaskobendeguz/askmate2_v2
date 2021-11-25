@@ -47,6 +47,8 @@ def display_question(question_id):
     global USER
     if USER == '':
         return redirect('/')
+    if request.args:  # view=true
+        util.increase_view(question_id)
     question = util.get_user_post_by_id(question_id, is_question=True)
     answers = data_manager.answers_by_question_id(question_id)
     return render_template('display_question.html', question=question, forum_posts=answers, user=USER)
