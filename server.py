@@ -46,11 +46,13 @@ def display_question(question_id):
     return render_template('display_question.html', question=question, forum_posts=answers, user=USER)
 
 
-@app.route('/add-question')
+@app.route('/add-question', methods=['GET', 'POST'])
 def ask_question():
     global USER
-    util.create_question(request.form, USER)
-    question_id = 1
+    if request.method == 'POST':
+        util.create_question(request.form, USER)
+        question_id = 1
+        redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
 
