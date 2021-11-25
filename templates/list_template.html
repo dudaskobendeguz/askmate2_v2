@@ -14,7 +14,6 @@
 {% block display_question %}{% endblock %}
 
 {% block edit %}{% endblock %}
-{% block delete %}{% endblock %}
 
 {% block table %}
 <table border="1">
@@ -57,7 +56,7 @@
                     </form>
                 {% endif %}
             {% else %}
-                {% if QNA['question_id'] %}
+                {% if QNA['question_id'] and QNA['username'] == user %}
                     <form action='/answer/{{ QNA["id"] }}/edit'>
                         <td><button><strong>Edit</strong></button></td>
                     </form>

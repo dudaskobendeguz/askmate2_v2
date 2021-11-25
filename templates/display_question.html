@@ -28,14 +28,14 @@
 {% endblock %}
 
 {% block edit %}
-    <form action='/question/{{ question["id"] }}/edit'>
-        <button><strong>Edit</strong></button>
-    </form>
-    <br>
-{% endblock %}
+    {% if user == question['username'] %}
+        <form action='/question/{{ question["id"] }}/edit'>
+            <button><strong>Edit</strong></button>
+        </form>
+        <br>
 
-{% block delete %}
-    <form action='/question/{{ question["id"] }}/delete'>
-        <button style="color: #ff0000"><strong>Delete</strong></button>
-    </form>
+        <form action='/question/{{ question["id"] }}/delete'>
+            <button style="color: #ff0000"><strong>Delete</strong></button>
+        </form>
+    {% endif %}
 {% endblock %}
