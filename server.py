@@ -74,12 +74,14 @@ def vote(question_id=None, answer_id=None):
             util.vote(question_id, is_question=True, vote=1)
         else:
             util.vote(question_id, is_question=True, vote=-1)
+        return redirect("/list")
     else:
         if 'vote_up' in request.base_url:
             util.vote(answer_id, is_question=False, vote=1)
         else:
             util.vote(answer_id, is_question=False, vote=-1)
-    return redirect("/list")
+        answer = util.get_user_post_by_id(answer_id, is_question=False)
+        return redirect(f'/question/{answer["question_id"]}')
 
 
 if __name__ == "__main__":
