@@ -92,3 +92,20 @@ def delete_answers_for_question(question_id):
         if answer['question_id'] == question_id:
             answers.remove(answer)
     data_manager.export_answers(answers)
+
+
+def vote(post_id,  is_question, vote):
+    if is_question:
+        questions = data_manager.get_questions()
+        question = get_user_post_by_id(post_id, is_question=True)
+        index = questions.index(question)
+        question['vote_number'] = str(int(question['vote_number']) + int(vote))
+        questions[index] = question
+        data_manager.export_questions(questions)
+    else:
+        answers = data_manager.get_answers()
+        answer = get_user_post_by_id(post_id, is_question=False)
+        index = answers.index(answer)
+        answer['vote_number'] = str(int(answer['vote_number']) + int(vote))
+        answers[index] = answer
+        data_manager.export_answers(answers)

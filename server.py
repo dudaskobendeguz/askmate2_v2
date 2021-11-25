@@ -64,6 +64,23 @@ def delete(question_id=None, answer_id=None):
     return redirect('/list')
 
 
+@app.route('/question/<question_id>/vote_up')
+@app.route('/question/<question_id>/vote_down')
+@app.route('/answer/<answer_id>/vote_up')
+@app.route('/answer/<answer_id>/vote_down')
+def vote(question_id=None, answer_id=None):
+    if question_id:
+        if 'vote_up' in request.base_url:
+            util.vote(question_id, is_question=True, vote=1)
+        else:
+            util.vote(question_id, is_question=True, vote=-1)
+    else:
+        if 'vote_up' in request.base_url:
+            util.vote(answer_id, is_question=False, vote=1)
+        else:
+            util.vote(answer_id, is_question=False, vote=-1)
+    return redirect("/list")
+
 if __name__ == "__main__":
     app.run(
         host='0.0.0.0',
