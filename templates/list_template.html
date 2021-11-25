@@ -60,7 +60,12 @@
                         <td><a href="/question/{{ QNA['id'] }}?view=true">{{ value }}</a></td>
                     {% else %}
                         {% if key not in ["question_id", 'id'] %}
-                            <td>{{ value }}</td>
+                            {% if key == "image" and key != "" %}
+                                <td><img src="./static/picture/{{ value }}" style="max-height: 50px";></td>
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+
                         {% endif %}
                     {% endif %}
                 {% endfor %}
