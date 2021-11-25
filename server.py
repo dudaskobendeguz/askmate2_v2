@@ -3,13 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import data_manager, util
 
-UPLOAD_FOLDER_ANSWER = './static/picture/answer'
-UPLOAD_FOLDER_QUESTION = './static/picture/question'
+UPLOAD_FOLDER = './static/picture/'
 USER = None
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER_ANSWER', 'UPLOAD_FOLDER_QUESTION'] = UPLOAD_FOLDER_ANSWER, UPLOAD_FOLDER_QUESTION
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
@@ -20,7 +18,7 @@ def main_page():
     username = ''
     if '/login' in request.base_url:
         if request.method == 'POST' and request.form['password']:
-            valid_password= util.log_in(request.form)
+            valid_password = util.log_in(request.form)
             if not valid_password:
                 return redirect(f'/?login=False&username={request.form["username"]}')
             USER = request.form['username']
@@ -68,26 +66,21 @@ def ask_question(question_id=None):
         return redirect('/')
     if request.method == 'POST':
         image = request.files['image']
-        if image != '':
+        if image.filename != '':
             if util.allowed_file(image):
                 filename = secure_filename(image.filename)
-                if question_id:
-                    folder_name = 'UPLOAD_FOLDER_ANSWER'
-                else:
-                    folder_name = 'UPLOAD_FOLDER_QUESTION'
-                image.save(os.path.join(app.config[folder_name], filename))
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            filename = ''
         if question_id:
             util.create_answer(request.form, question_id, USER, filename)
-            return redirect(f'/question/{question_id}')
         else:
             util.create_question(request.form, USER, filename)
+        return redirect(f'/question/{question_id}')
     if question_id:
         return render_template('add_answer.html', question_id=question_id)
-
-    if request.method == 'POST':
-        util.create_question(request.form, USER)
-        redirect(f'/question/{question_id}')
-    return render_template('add_question.html')
+    else:
+        return render_template('add_question.html')
 
 
 @app.route('/answer/<answer_id>/delete', methods=['GET', 'POST'])

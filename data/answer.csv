@@ -7,5 +7,5 @@ id,username,submission_time,vote_number,question_id,message,image
 6,bende,1493088154,35,4,Look it up in the Python docs,
 7,bende,1493088154,36,5,Look it up in the Python docs,
 8,bende,1493088154,35,6,Look it up in the Python docs,
-bende_1637843733.1561553,bende,1637843733.1561553,0,1,its working,not yet
 bende_1637848628.817957,bende,1637848628.817957,0,6,lehet nem müxik még az export sem,"ImmutableMultiDict([('image', <FileStorage: 'roli.jpg' ('image/jpeg')>)])"
+bende_1637855085.4092753,bende,1637855085.4092753,0,1,BELLO,Screenshot_from_2021-11-18_09-30-27.png
