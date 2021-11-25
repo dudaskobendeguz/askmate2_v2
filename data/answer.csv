@@ -1,6 +1,6 @@
 id,username,submission_time,vote_number,question_id,message,image
-1,lacika,1493398154,18,1,You need to use brackets: my_list = [],
-2,csokivezer_412,1493088154,21,1,Look it up in the Python docs,
+1,lacika,1493398154,22,1,You need to use brackets: my_list = [],
+2,csokivezer_412,1493088154,23,1,Look it up in the Python docs,
 3,bende,1493088154,35,4,Look it up in the Python docs,
 4,bende,1493088154,35,4,Look it up in the Python docs,
 5,bende,1493088154,35,4,Look it up in the Python docs,
@@ -9,4 +9,3 @@ id,username,submission_time,vote_number,question_id,message,image
 8,bende,1493088154,35,6,Look it up in the Python docs,
 bende_1637843733.1561553,bende,1637843733.1561553,0,1,its working,not yet
 bende_1637848628.817957,bende,1637848628.817957,0,6,lehet nem müxik még az export sem,"ImmutableMultiDict([('image', <FileStorage: 'roli.jpg' ('image/jpeg')>)])"
-bende_1637850609.7963371,bende,1637850609.7963371,0,1,2222,"ImmutableMultiDict([('image', <FileStorage: 'miért kell kérdőjel.png' ('image/png')>)])"

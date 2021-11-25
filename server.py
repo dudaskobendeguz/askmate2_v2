@@ -83,6 +83,10 @@ def ask_question(question_id=None):
             util.create_question(request.form, USER, filename)
     if question_id:
         return render_template('add_answer.html', question_id=question_id)
+
+    if request.method == 'POST':
+        util.create_question(request.form, USER)
+        redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
 
