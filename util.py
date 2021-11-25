@@ -1,6 +1,7 @@
 from time import time
 import data_manager, connection
 
+ALLOWED_EXTENSIONS = ['jpg', 'png']
 
 def log_in(user):
     users = connection.open_file(data_manager.USER_FILE_PATH)
@@ -34,14 +35,14 @@ def sort_questions(orders):
     return ordered_list
 
 
-def create_question(question_details, username):
+def create_question(question_details, username, image=None):
     question = {}  # ki kell tölteni
     submission_time = time()
     id = generate_id(username, submission_time)
     return question
 
 
-def create_answer(answer_details, question_id, username):
+def create_answer(answer_details, question_id, username, image=''):
     submission_time = time()
     answer_id = generate_id(username, submission_time)
     answer = {
@@ -51,7 +52,7 @@ def create_answer(answer_details, question_id, username):
         'vote_number': '0',
         'question_id': question_id,
         'message': answer_details['message'],
-        'image': 'not yet'
+        'image': image
     }
     data_manager.export_new_answers(answer)
 
@@ -119,3 +120,9 @@ def manipulate_post_number(post, posts, number, key):
     post[key] = str(int(post[key]) + int(number))
     posts[index] = post
     return posts
+
+
+def allowed_file(image: str):
+    global ALLOWED_EXTENSIONS
+    image_extension = image.filename.rsplit('.')[1]
+    return image_extension in ALLOWED_EXTENSIONS

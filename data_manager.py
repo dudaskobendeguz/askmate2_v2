@@ -36,9 +36,8 @@ def answers_by_question_id(question_id):
     return answers_list
 
 
-def export_new_question(question_details, username):  # ide kell neki a request.form
+def export_new_question(new_question):
     question_list = get_questions()
-    new_question = util.create_question(question_details, username)
     question_list.append(new_question)
     export_questions(question_list)
 
@@ -55,4 +54,3 @@ def register_new_user(user, users):
     connection.write_file(users, USER_FILE_PATH, USER_HEADER)
     valid_password = True
     return valid_password
-
