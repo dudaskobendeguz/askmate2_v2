@@ -1,5 +1,9 @@
 {% extends "list_template.html" %}
 
+{% block log_out %}
+<a href="/log_out"><strong>Log out</strong></a>
+{% endblock %}
+
 {% block h1 %}Hello {{ user.capitalize() }}!!!{% endblock %}
 {% block h4 %}Here you can see the questions{% endblock %}
 

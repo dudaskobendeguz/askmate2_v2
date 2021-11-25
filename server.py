@@ -1,15 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
-
 import data_manager, util
 
 app = Flask(__name__)
-
-
 USER = ''
 
 
 @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
+@app.route('/log_out')
 def main_page():
     global USER
     message = 'Create a New Account, or Log in'
@@ -21,6 +19,9 @@ def main_page():
                 return redirect(f'/?login=False&username={request.form["username"]}')
             USER = request.form['username']
             return redirect(f'/list')
+    elif '/log_out' in request.base_url:
+        USER = ''
+        return redirect('/')
     else:
         if request.args:
             if request.args['login'] == 'False':
@@ -32,6 +33,9 @@ def main_page():
 
 @app.route('/list', methods=['GET', 'POST'])
 def list_posts():
+    global USER
+    if USER == '':
+        return redirect('/')
     questions = data_manager.get_questions()
     if request.args:
         questions = util.sort_questions(request.args)
@@ -41,17 +45,29 @@ def list_posts():
 @app.route('/question/<question_id>')
 def display_question(question_id):
     global USER
+    if USER == '':
+        return redirect('/')
+    if request.args:  # view=true
+        util.increase_view(question_id)
     question = util.get_user_post_by_id(question_id, is_question=True)
     answers = data_manager.answers_by_question_id(question_id)
     return render_template('display_question.html', question=question, forum_posts=answers, user=USER)
 
 
-@app.route('/add-question', methods=['GET', 'POST'])
-def ask_question():
+@app.route('/question/<question_id>/new-answer', methods=['POST', 'GET'])
+@app.route('/add-question', methods=['POST', 'GET'])
+def ask_question(question_id=None):
     global USER
+    if USER == '':
+        return redirect('/')
+    if question_id:
+        if request.method == 'POST':
+            util.create_answer(request.form, question_id, USER)
+            return redirect(f'/question/{question_id}')
+        return render_template('add_answer.html', question_id=question_id)
+
     if request.method == 'POST':
         util.create_question(request.form, USER)
-        question_id = 1
         redirect(f'/question/{question_id}')
     return render_template('add_question.html')
 
@@ -59,6 +75,9 @@ def ask_question():
 @app.route('/answer/<answer_id>/delete', methods=['GET', 'POST'])
 @app.route('/question/<question_id>/delete', methods=['GET', 'POST'])
 def delete(question_id=None, answer_id=None):
+    global USER
+    if USER == '':
+        return redirect('/')
     if question_id:
         util.delete_question(question_id)
     else:
@@ -71,6 +90,9 @@ def delete(question_id=None, answer_id=None):
 @app.route('/answer/<answer_id>/vote_up')
 @app.route('/answer/<answer_id>/vote_down')
 def vote(question_id=None, answer_id=None):
+    global USER
+    if USER == '':
+        return redirect('/')
     if question_id:
         if 'vote_up' in request.base_url:
             util.vote(question_id, is_question=True, vote=1)

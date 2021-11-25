@@ -1,5 +1,9 @@
 {% extends "list_template.html" %}
 
+{%  block back_button %}
+    <a href="/list"><strong>Back</strong></a>
+{% endblock %}
+
 {% block h1 %}Question from<br> {{ question['username'] }}{% endblock %}
 {% block display_question %}
     <h3>Title</h3>
@@ -32,14 +36,20 @@
 {% endblock %}
 
 {% block edit %}
-    <form action='/question/{{ question["id"] }}/edit'>
-        <button><strong>Edit</strong></button>
-    </form>
-    <br>
+    {% if user == question['username'] %}
+        <form action='/question/{{ question["id"] }}/edit'>
+            <button><strong>Edit</strong></button>
+        </form>
+        <br>
+
+        <form action='/question/{{ question["id"] }}/delete'>
+            <button style="color: #ff0000"><strong>Delete</strong></button>
+        </form>
+    {% endif %}
 {% endblock %}
 
-{% block delete %}
-    <form action='/question/{{ question["id"] }}/delete'>
-        <button style="color: #ff0000"><strong>Delete</strong></button>
+{% block add_new %}
+    <form action="/question/{{ question['id'] }}/new-answer", method="get">
+        <button type="submit"><strong>Write Answer</strong></button>
     </form>
 {% endblock %}
