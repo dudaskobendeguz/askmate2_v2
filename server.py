@@ -51,7 +51,7 @@ def ask_question():
     global USER
     util.create_question(request.form, USER)
     question_id = 1
-    return render_template('add_question.html', new_question_id=question_id)
+    return render_template('add_question.html')
 
 
 @app.route('/answer/<answer_id>/delete', methods=['GET', 'POST'])

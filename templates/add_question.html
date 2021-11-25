@@ -3,7 +3,7 @@
 {% block h1 %}Ask a question{% endblock %}
 
 {% block table %}
-    <form action="question/{{ new_question_id }}" method="post">
+    <form action="/add-question" method="post">
         <label for="title"><strong>Title of your question:</strong></label><br>
         <textarea name="title" required rows="5" cols="25"></textarea><br><br>
 
