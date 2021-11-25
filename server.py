@@ -9,6 +9,7 @@ USER = None
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
 @app.route('/log_out')
@@ -56,6 +57,26 @@ def display_question(question_id):
     question = util.get_user_post_by_id(question_id, is_question=True)
     answers = data_manager.answers_by_question_id(question_id)
     return render_template('display_question.html', question=question, forum_posts=answers, user=USER)
+
+
+@app.route('/answer/<answer_id>/edit', methods=['POST', 'GET'])
+def edit_answer(answer_id):
+    answer = util.get_user_post_by_id(answer_id, is_question=False)
+    if request.method == 'POST':
+        answer_new_details = request.form
+        util.edit_answer(answer, answer_new_details, answer_id)
+        return redirect('/list')
+    return render_template('edit_answer.html', answer=answer, answer_id=answer_id)
+
+
+@app.route('/question/<question_id>/edit', methods=['POST', 'GET'])
+def edit_question(question_id):
+    question = util.get_user_post_by_id(question_id, is_question=True)
+    if request.method == 'POST':
+        question_new_details = request.form
+        util.edit_question(question, question_new_details, question_id)
+        return redirect(f'/question/{question_id}')
+    return render_template('edit_question.html', question=question, question_id=question_id)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['POST', 'GET'])

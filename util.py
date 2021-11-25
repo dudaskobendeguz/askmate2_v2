@@ -35,6 +35,21 @@ def sort_questions(orders):
     return ordered_list
 
 
+def edit_question(question, new_details, question_id):
+    delete_question(question_id)
+    question['title'] = new_details['title']
+    question['message'] = new_details['message']
+    edited_question = question
+    data_manager.export_new_question(edited_question)
+
+
+def edit_answer(answer, new_details, answer_id):
+    delete_answer(answer_id)
+    answer['message'] = new_details['message']
+    edited_answer = answer
+    data_manager.export_new_answers(edited_answer)
+
+
 def create_question(question_details, username, image=None):
     submission_time = time()
     id = generate_id(username, submission_time)

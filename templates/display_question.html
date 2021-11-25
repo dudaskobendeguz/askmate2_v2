@@ -1,10 +1,7 @@
 {% extends "list_template.html" %}
 
-{%  block back_button %}
-    <a href="/list"><strong>Back</strong></a>
-{% endblock %}
 
-{% block h1 %}Question from<br> {{ question['username'] }}{% endblock %}
+{% block h1 %}Question from<br> {{ question['username'].capitalize() }}{% endblock %}
 {% block display_question %}
     <h3>Title</h3>
         <p>{{ question['title'] }}

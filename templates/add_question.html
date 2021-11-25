@@ -4,14 +4,14 @@
 
 {% block table %}
     <form action="{% block link %}/add-question{% endblock %}" method="post" enctype="multipart/form-data">
-        <label for="title"><strong>Title of your question:</strong></label><br>
-        <textarea name="title" required rows="5" cols="25"></textarea><br><br>
+        {% block whole_title %}<label for="title"><strong>Title of your question:</strong></label><br>
+        <textarea name="title" required rows="5" cols="25">{% block question_title %}{% endblock %}</textarea><br><br>{% endblock %}
 
         <label for="message"><strong>Your message:</strong></label><br>
-        <textarea name="message" required rows="10" cols="50"></textarea><br><br>
+        <textarea name="message" required rows="10" cols="50">{% block question_message %}{% endblock %}</textarea><br><br>
 
         <input type="file" name="image">
 
-        <button type="submit" value="Upload">Send question</button>
+        <button type="submit" value="Upload">{% block button %}Send question{% endblock %}</button>
     </form>
 {% endblock %}

@@ -26,7 +26,7 @@
     {% block log_out %}{% endblock %}
 </div>
 <div class="back">
-    {%  block back_button %}{% endblock %}
+    {%  block back_button %}<a href="/list"><strong>Back</strong></a>{% endblock %}
 </div>
 <div class="center">
     <h1>{% block h1 %}{% endblock %}</h1><br>
@@ -49,7 +49,7 @@
             <tr>
             {% block categories %}{% endblock %}
         {% else %}
-            {{ 'There is no question yet' }}
+            {{ 'There is no answer yet' }}
             </tr>
         {% endif %}
         {% if forum_posts != [] %}
