@@ -3,80 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Jinja V3 Forum{% endblock %}</title>
+    <style>
+        .center{
+            text-align: center;
+        }
+        .back{
+            text-align: left;
+            color: coral;
+            font-size: x-large;
+        }
+        .log_out{
+            text-align: right;
+        }
+    </style>
 </head>
-<body style="text-align: center">
-<h1>{% block h1 %}{% endblock %}</h1><br>
+<body>
+<div class="log_out">
+    {% block log_out %}{% endblock %}
+</div>
+<div class="back">
+    {%  block back_button %}{% endblock %}
+</div>
+<div class="center">
+    <h1>{% block h1 %}{% endblock %}</h1><br>
 
-<h4>{%block h4%}{% endblock %}</h4>
+    <h4>{%block h4%}{% endblock %}</h4>
 
-{% block ask_question %}{% endblock %}
+    {% block ask_question %}{% endblock %}
 
-{% block display_question %}{% endblock %}
+    {% block display_question %}{% endblock %}
 
-{% block edit %}{% endblock %}
+    {% block edit %}{% endblock %}
 
-{% block table %}
-<table border="1">
-    {% if forum_posts != [] %}
-        <tr>
-        {% block categories %}{% endblock %}
-    {% else %}
-        {{ 'There is no question yet' }}
-        </tr>
-    {% endif %}
-    {% if forum_posts != [] %}
-        {% for QNA in forum_posts %}
+    {% block table %}
+    <table border="1">
+        {% if forum_posts != [] %}
             <tr>
-            {% for key, value in QNA.items() %}
-                {% if key == 'title' %}
-                    <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
+            {% block categories %}{% endblock %}
+        {% else %}
+            {{ 'There is no question yet' }}
+            </tr>
+        {% endif %}
+        {% if forum_posts != [] %}
+            {% for QNA in forum_posts %}
+                <tr>
+                {% for key, value in QNA.items() %}
+                    {% if key == 'title' %}
+                        <td><a href="/question/{{ QNA['id'] }}">{{ value }}</a></td>
+                    {% else %}
+                        {% if key not in ["question_id", 'id'] %}
+                            <td>{{ value }}</td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if user != QNA['username'] %}
+                    {% if QNA['question_id'] %}
+                        <form action='/answer/{{ QNA["id"] }}/vote_up'>
+                            <td><button style="color: darkblue"><strong>👍</strong></button></td>
+                        </form>
+
+                        <form action='/answer/{{ QNA["id"] }}/vote_down'>
+                            <td><button style="color: darkred"><strong>👎</strong></button></td>
+                        </form>
+
+                    {% else %}
+                        <form action='/question/{{ QNA["id"] }}/vote_up'>
+                            <td><button style="color: darkblue"><strong>👍</strong></button></td>
+                        </form>
+
+                        <form action='/question/{{ QNA["id"] }}/vote_down'>
+                            <td><button style="color: darkred"><strong>👎</strong></button></td>
+                        </form>
+                    {% endif %}
                 {% else %}
-                    {% if key not in ["question_id", 'id'] %}
-                        <td>{{ value }}</td>
+                    {% if QNA['question_id'] and QNA['username'] == user %}
+                        <form action='/answer/{{ QNA["id"] }}/edit'>
+                            <td><button><strong>Edit</strong></button></td>
+                        </form>
+
+                        <form action='/answer/{{ QNA["id"] }}/delete'>
+                            <td><button style="color: red"><strong>Delete</strong></button></td>
+                        </form>
+
+                    {% else %}
+
+                        <form action='/question/{{ QNA["id"] }}/edit'>
+                            <td><button><strong>Edit</strong></button></td>
+                        </form>
+
                     {% endif %}
                 {% endif %}
+                </tr>
             {% endfor %}
-            {% if user != QNA['username'] %}
-                {% if QNA['question_id'] %}
-                    <form action='/answer/{{ QNA["id"] }}/vote_up'>
-                        <td><button style="color: darkblue"><strong>👍</strong></button></td>
-                    </form>
-
-                    <form action='/answer/{{ QNA["id"] }}/vote_down'>
-                        <td><button style="color: darkred"><strong>👎</strong></button></td>
-                    </form>
-
-                {% else %}
-                    <form action='/question/{{ QNA["id"] }}/vote_up'>
-                        <td><button style="color: darkblue"><strong>👍</strong></button></td>
-                    </form>
-
-                    <form action='/question/{{ QNA["id"] }}/vote_down'>
-                        <td><button style="color: darkred"><strong>👎</strong></button></td>
-                    </form>
-                {% endif %}
-            {% else %}
-                {% if QNA['question_id'] and QNA['username'] == user %}
-                    <form action='/answer/{{ QNA["id"] }}/edit'>
-                        <td><button><strong>Edit</strong></button></td>
-                    </form>
-
-                    <form action='/answer/{{ QNA["id"] }}/delete'>
-                        <td><button style="color: red"><strong>Delete</strong></button></td>
-                    </form>
-
-                {% else %}
-
-                    <form action='/question/{{ QNA["id"] }}/edit'>
-                        <td><button><strong>Edit</strong></button></td>
-                    </form>
-
-                {% endif %}
-            {% endif %}
-            </tr>
-        {% endfor %}
-    {% endif %}
-</table>
-{% endblock %}
+        {% endif %}
+    </table>
+    {% endblock %}
+</div>
 </body>
 </html>
