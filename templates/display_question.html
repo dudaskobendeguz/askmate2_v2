@@ -47,3 +47,9 @@
         </form>
     {% endif %}
 {% endblock %}
+
+{% block add_new %}
+    <form action="/question/{{ question['id'] }}/new-answer", method="get">
+        <button type="submit"><strong>Write Answer</strong></button>
+    </form>
+{% endblock %}

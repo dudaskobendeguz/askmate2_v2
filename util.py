@@ -41,7 +41,7 @@ def create_question(question_details, username):
     return question
 
 
-def create_answer(answer_details, username):
+def create_answer(answer_details, question_id, username):
     submission_time = time()
     answer_id = generate_id(username, submission_time)
     answer = {
@@ -49,11 +49,11 @@ def create_answer(answer_details, username):
         'username': username,
         'submission_time': submission_time,
         'vote_number': '0',
-        'question_id': None,##################
+        'question_id': question_id,
         'message': answer_details['message'],
-        'image': answer_details['image']#########################
+        'image': 'not yet'
     }
-    return answer
+    data_manager.export_new_answers(answer)
 
 
 def get_user_post_by_id(post_id, is_question):

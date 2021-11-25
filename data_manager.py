@@ -43,9 +43,8 @@ def export_new_question(question_details, username):  # ide kell neki a request.
     export_questions(question_list)
 
 
-def export_new_answers(answer_details, username):
+def export_new_answers(new_answer):
     answer_list = get_answers()
-    new_answer = util.create_answer(answer_details, username)
     answer_list.append(new_answer)
     export_answers(answer_list)
 

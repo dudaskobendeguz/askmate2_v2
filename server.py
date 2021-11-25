@@ -54,13 +54,20 @@ def display_question(question_id):
     return render_template('display_question.html', question=question, forum_posts=answers, user=USER)
 
 
-@app.route('/add-question')
-def ask_question():
+@app.route('/question/<question_id>/new-answer', methods=['POST', 'GET'])
+@app.route('/add-question', methods=['POST', 'GET'])
+def ask_question(question_id=None):
     global USER
     if USER == '':
         return redirect('/')
-    util.create_question(request.form, USER)
-    question_id = 1
+    if question_id:
+        if request.method == 'POST':
+            util.create_answer(request.form, question_id, USER)
+            return redirect(f'/question/{question_id}')
+        return render_template('add_answer.html', question_id=question_id)
+
+    if request.method == 'POST':
+        util.create_question(request.form, USER)
     return render_template('add_question.html')
 
 
