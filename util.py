@@ -36,10 +36,20 @@ def sort_questions(orders):
 
 
 def create_question(question_details, username, image=None):
-    question = {}  # ki kell tölteni
     submission_time = time()
     id = generate_id(username, submission_time)
-    return question
+    question = {
+        'id': id,
+        'username': username,
+        'submission_time': submission_time,
+        'view_number': '0',
+        'vote_number': '0',
+        'title': question_details['title'],
+        'message': question_details['message'],
+        'image': image
+    }
+    data_manager.export_new_question(question)
+    return id
 
 
 def create_answer(answer_details, question_id, username, image=''):
