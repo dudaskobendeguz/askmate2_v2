@@ -90,12 +90,13 @@ def ask_question(question_id=None):
         image = request.files['image']
         if image.filename != '':
             if util.allowed_file(image):
-                if not question_id:
-                    filename = secure_filename(image.filename)
-                    id_time = time()
-                    image_id = util.generate_id(filename, id_time)
+                filename = secure_filename(image.filename)
+                id_time = time()
+                image_id = util.generate_id(filename, id_time)
                 filename = image_id
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                filename = None
         else:
             filename = None
         if question_id:
