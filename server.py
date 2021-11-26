@@ -1,4 +1,5 @@
 import os
+from time import time
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import data_manager, util
@@ -89,10 +90,14 @@ def ask_question(question_id=None):
         image = request.files['image']
         if image.filename != '':
             if util.allowed_file(image):
-                filename = secure_filename(image.filename)
+                if not question_id:
+                    filename = secure_filename(image.filename)
+                    id_time = time()
+                    image_id = util.generate_id(filename, id_time)
+                filename = image_id
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            filename = ''
+            filename = None
         if question_id:
             util.create_answer(request.form, question_id, USER, filename)
         else:

@@ -1,31 +1,16 @@
 id,username,submission_time,view_number,vote_number,title,message,image
 1,belaba12,1493368154,51,-5,How to make lists in Python?,"I am totally new to this, any hints?",
-2,benibaba321,1493068124,17,30,Wordpress loading multiple jQuery Versions,"I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $('.myBook').booklet();
-1,belaba12,1493368154,49,-5,How to make lists in Python?,"I am totally new to this, any hints?",
-2,benibaba321,1493068124,18,30,Wordpress loading multiple jQuery Versions,"I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $('.myBook').booklet();
-
-I could easy managing the loading order with wp_enqueue_script so first I load jquery then I load booklet so everything is fine.
-
-BUT in my theme i also using jquery via webpack so the loading order is now following:
-
-jquery
-booklet
-app.js (bundled file with webpack, including jquery)",images/image1.png
-3,gyuriba,1493015432,1371,62,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
+3,gyuriba,1493015432,1372,62,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
 
 This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
-4,bende,1493015432,1367,61,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
+6,bende,1493015432,1374,58,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
 
 This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
-5,bende,1493015432,1366,51,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
-
-This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
-6,bende,1493015432,1371,58,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
-
-This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
-zsu_1637855441.6682,zsu,1637855441.6682,4,0,GYM,Menjéééééééél,
+zsu_1637855441.6682,zsu,1637855441.6682,5,0,GYM,Menjéééééééél,
 zsu_1637859088.4959874,zsu,1637859088.4959874,6,0,Beni,kösziiiiii köszziiiiiii,
-zsu_1637855859.5298522,zsu,1637855859.5298522,20,0,Na teszt megint,pápápápá----,macesz.png
+zsu_1637855859.5298522,zsu,1637855859.5298522,21,0,Na teszt megint,pápápápá----,macesz.png
 zsu_1637867501.1734967,zsu,1637867501.1734967,9,0,mukszziiik,tudom hogy muksziiik!!!zzzzzzzzzzzzz,
 zsu_1637871852.2506826,zsu,1637871852.2506826,3,0,Bendének <3,megcsináltam a részemet Bendus ,
 zsu_1637855404.3811686,zsu,1637855404.3811686,3,0,GYM,Bende mész gyúrni??????!!!!,
+tepertos_gyuriba_1637907584.2033367,tepertos_gyuriba,1637907584.2033367,10,-1,Soon I'm ouf ot teperő!!!,"Today morning i just realized that, i only have a half kg's of teperő in my fridge!!!! If I out of tepertő, my life will end it that point!!! Please give me some advice, what should i do?",Teperto.jpg
+im-not-kid_2012_1637910530.7766144,im-not-kid_2012,1637910530.7766144,0,0,I need new account on fortnite,i need a new account!!!! my mother took my original account... i want another one pls help!!!,81AJjEZVLKL.png_1637910530.7759993

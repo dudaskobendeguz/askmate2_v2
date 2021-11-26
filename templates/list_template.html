@@ -19,6 +19,12 @@
             color: olive;
             font-size: xx-large;
         }
+        .table{
+            max-width: 1500px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px black;
+        }
     </style>
 </head>
 <body>
@@ -26,7 +32,7 @@
     {% block log_out %}{% endblock %}
 </div>
 <div class="back">
-    {%  block back_button %}<a href="/list"><strong>Back</strong></a>{% endblock %}
+    {% block back_button %}<a href="/list"><strong>Back</strong></a>{% endblock %}
 </div>
 <div class="center">
     <h1>{% block h1 %}{% endblock %}</h1><br>
@@ -42,7 +48,7 @@
     {% block edit %}{% endblock %}
 
     {% block add_new %}{% endblock %}
-
+    <div>
     {% block table %}
     <table border="1">
         {% if forum_posts != [] %}
@@ -60,8 +66,10 @@
                         <td><a href="/question/{{ QNA['id'] }}?view=true">{{ value }}</a></td>
                     {% else %}
                         {% if key not in ["question_id", 'id'] %}
-                            {% if key == "image" and key != "" %}
-                                <td><img src="./static/picture/{{ value }}" style="max-height: 50px";></td>
+                            {% if key == "image" and value != "" %}
+                                <td><a href="/static/picture/{{ value }}" target="_blank">
+                                    <img src="/static/picture/{{ value }}" style="max-height: 50px";>
+                                </a></td>
                             {% else %}
                                 <td>{{ value }}</td>
                             {% endif %}
@@ -111,6 +119,7 @@
         {% endif %}
     </table>
     {% endblock %}
+    </div>
 </div>
 </body>
 </html>
