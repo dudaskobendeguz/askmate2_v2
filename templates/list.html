@@ -1,0 +1,22 @@
+{% extends "list_template.html" %}
+
+{% block log_out %}
+<a href="/log_out"><strong>Log out</strong></a>
+{% endblock %}
+{% block back_button %}{% endblock %}
+{% block h1 %}Hello {{ user.capitalize() }}!!!{% endblock %}
+{% block h4 %}Here you can see the questions{% endblock %}
+
+{% block ask_question %}<a href="/add-question">Ask a question</a><br><br>{% endblock %}
+
+{% block categories %}
+{% for key in forum_posts[0].keys() %}
+    {% if key !='id' %}
+        <th>
+            <a href="/list?order_by={{ key }}&order_direction=asc">&#8648</a>
+            {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+            <a href="/list?order_by={{ key }}&order_direction=desc">&#8650</a>
+        </th>
+    {% endif %}
+{% endfor %}
+{% endblock %}

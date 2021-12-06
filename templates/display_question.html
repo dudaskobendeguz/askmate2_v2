@@ -1,0 +1,54 @@
+{% extends "list_template.html" %}
+
+
+{% block h1 %}Question from<br> {{ question['username'].capitalize() }}{% endblock %}
+{% block display_question %}
+    <h3>Title</h3>
+        <p>{{ question['title'] }}
+        <br>
+    <h3>Question</h3>
+        <p>{{ question['message'] }}
+        <br>
+    {% if question['image'] != ""  %}
+        <h3>Picture</h3>
+       <a href="/static/picture/{{ question['image'] }}">
+            <img src="/static/picture/{{ question['image'] }}" style="max-width: 300px";>
+       </a>
+    {% endif %}
+    <br>
+    <p><strong>Views:</strong> {{ question['view_number'] }}</p>
+    <p><strong>Votes:</strong> {{ question['vote_number'] }}</p>
+{% endblock %}
+
+{% block categories %}
+{% for key in forum_posts[0].keys() %}
+    {% if key not in  ["question_id", "id"] %}
+        {% if key == 'message' %}
+            <th>ANSWER(S)</th>
+        {% else %}
+            <th>
+            {{ key.upper() if '_' not in key else key.replace('_', ' ').upper() }}
+            </th>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block edit %}
+    {% if user == question['username'] %}
+        <form action='/question/{{ question["id"] }}/edit'>
+            <button><strong>Edit</strong></button>
+        </form>
+        <br>
+
+        <form action='/question/{{ question["id"] }}/delete'>
+            <button style="color: #ff0000"><strong>Delete</strong></button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block add_new %}
+    <form action="/question/{{ question['id'] }}/new-answer", method="get">
+        <button type="submit"><strong>Write Answer</strong></button>
+    </form>
+{% endblock %}

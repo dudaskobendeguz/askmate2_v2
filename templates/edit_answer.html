@@ -1,0 +1,11 @@
+{% extends "add_question.html" %}
+
+{% block h1 %}Edit your answer{% endblock %}
+
+{% block link %}/answer/{{ answer_id }}/edit{% endblock %}
+
+{% block whole_title %}{% endblock %}
+
+{% block question_message %}{{ answer['message'] }}{% endblock %}
+
+{% block button %}Edit answer{% endblock %}
